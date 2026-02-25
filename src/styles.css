@@ -47,6 +47,10 @@
 
 html, body{ height:100%; }
 
+html{
+  scrollbar-gutter:stable;
+}
+
 body{
   margin:0;
   font-family:"Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -73,6 +77,25 @@ body{
   justify-content:center;
   align-items:center;
   padding:22px;
+}
+
+.page.pageProfileOpen{
+  height:100vh;
+  max-height:100vh;
+  overflow:hidden;
+}
+
+body.bodyProfileOpen{
+  overflow:hidden;
+}
+
+html.htmlProfileOpen{
+  overflow:hidden;
+}
+
+body.bodyProfileOpen #root{
+  height:100vh;
+  overflow:hidden;
 }
 
 .shell{
@@ -3597,6 +3620,8 @@ body{
   flex:0 1 auto;
   top:0;
   z-index:2;
+  overflow-x:hidden;
+  overflow-y:hidden;
 }
 
 .top.topBoardHeader .controlsActions{
@@ -3608,13 +3633,15 @@ body{
   top:0;
   min-width:0;
   overflow-x:hidden;
+  overflow-y:hidden;
   align-self:flex-end;
 }
 
 .controlsActions{
   min-width:0;
   flex-wrap:nowrap;
-  overflow:visible;
+  overflow-x:visible;
+  overflow-y:hidden;
 }
 
 .searchBox{

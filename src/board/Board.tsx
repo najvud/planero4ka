@@ -2179,6 +2179,23 @@ export function Board({ sessionUser, onLogout, onProfileSave }: BoardProps) {
   }, [sessionLogin]);
 
   useEffect(() => {
+    const body = document.body;
+    const root = document.documentElement;
+    if (!body || !root) return;
+    if (profileOpen) {
+      body.classList.add('bodyProfileOpen');
+      root.classList.add('htmlProfileOpen');
+    } else {
+      body.classList.remove('bodyProfileOpen');
+      root.classList.remove('htmlProfileOpen');
+    }
+    return () => {
+      body.classList.remove('bodyProfileOpen');
+      root.classList.remove('htmlProfileOpen');
+    };
+  }, [profileOpen]);
+
+  useEffect(() => {
     return () => {
       if (undoTimerRef.current != null) window.clearTimeout(undoTimerRef.current);
       if (clearDragRafRef.current != null) window.cancelAnimationFrame(clearDragRafRef.current);
@@ -2917,7 +2934,7 @@ export function Board({ sessionUser, onLogout, onProfileSave }: BoardProps) {
   const controlsLayoutTransition = searchControlsTransition;
 
   return (
-    <div className={`page ${isBoardDragActive ? 'pageDragActive' : 'pagePerf'}`}>
+    <div className={`page ${isBoardDragActive ? 'pageDragActive' : 'pagePerf'} ${profileOpen ? 'pageProfileOpen' : ''}`}>
       <div className="shell">
         <div className="top topBoardHeader">
           <div className="topBoardMeta">
@@ -2969,12 +2986,10 @@ export function Board({ sessionUser, onLogout, onProfileSave }: BoardProps) {
           </div>
 
           <div className="controls">
-            <motion.div className="controlsActions" layout transition={controlsLayoutTransition}>
+            <motion.div className="controlsActions" layout="position" transition={controlsLayoutTransition}>
               <motion.div
                 className={`searchMorph ${searchOpen ? 'isOpen' : 'isClosed'} ${q.trim().length > 0 ? 'hasText' : ''}`}
                 role="search"
-                layout
-                transition={searchControlsTransition}
                 onClick={() => {
                   if (!searchOpen) setSearchOpen(true);
                 }}
@@ -3049,7 +3064,7 @@ export function Board({ sessionUser, onLogout, onProfileSave }: BoardProps) {
                 </button>
               </motion.div>
 
-              <motion.div className="filterMenuWrap" ref={filtersRef} layout transition={controlsLayoutTransition}>
+              <motion.div className="filterMenuWrap" ref={filtersRef}>
                 <button
                   type="button"
                   className={`filterToggle ${urgFilter !== 'all' ? 'filterToggleActive' : ''}`}
@@ -3134,8 +3149,6 @@ export function Board({ sessionUser, onLogout, onProfileSave }: BoardProps) {
                 }}
                 title={t('board.favorites')}
                 aria-label={t('board.favorites')}
-                layout
-                transition={motionProfile.controlLayoutTransition}
               >
                 <StarGlyph className="favoriteGlyph" />
               </motion.button>
@@ -3144,8 +3157,6 @@ export function Board({ sessionUser, onLogout, onProfileSave }: BoardProps) {
                 className="iconBtn"
                 onClick={openCreate}
                 title={t('board.createCard')}
-                layout
-                transition={motionProfile.controlLayoutTransition}
               >
                 +
               </motion.button>
