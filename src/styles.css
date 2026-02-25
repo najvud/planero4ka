@@ -519,6 +519,10 @@ body{
   position:relative;
 }
 
+.mainRow.mainRowProfileOpen{
+  min-height:var(--column-max-height);
+}
+
 .boardWrap{
   flex:1;
   min-width:0;
@@ -2554,6 +2558,9 @@ body{
   .mainRow{
     flex-direction:column;
     align-items:stretch;
+  }
+  .mainRow.mainRowProfileOpen{
+    min-height:0;
   }
   .boardWrap{
     width:100%;

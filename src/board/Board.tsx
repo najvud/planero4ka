@@ -3181,7 +3181,7 @@ export function Board({ sessionUser, onLogout, onProfileSave }: BoardProps) {
             </div>
           ) : null}
 
-          <div className="mainRow">
+          <div className={`mainRow ${profileOpen ? 'mainRowProfileOpen' : ''}`}>
             <div className="boardWrap">
               <div className="board">
                 {columns.map((col) => {
