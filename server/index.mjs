@@ -4982,6 +4982,9 @@ async function handleMysqlBoardAndCardsApi(req, res, pathname) {
     const title = sanitizeText(body.title, 512);
     const description = sanitizeText(body.description, 5000);
     const images = sanitizeCardImages(body.images, { persistDataUrls: true });
+    const checklist = Object.prototype.hasOwnProperty.call(body, 'checklist')
+      ? sanitizeChecklist(body.checklist)
+      : [];
     const createdBy = sanitizeCardCreator(user.login);
 
     let urgency = 'white';
@@ -5026,7 +5029,7 @@ async function handleMysqlBoardAndCardsApi(req, res, pathname) {
           title,
           description,
           encodeCardImagesForDb(images),
-          encodeChecklistForDb([]),
+          encodeChecklistForDb(checklist),
           createdBy,
           now,
           urgency,
@@ -5067,7 +5070,7 @@ async function handleMysqlBoardAndCardsApi(req, res, pathname) {
         title,
         description,
         images,
-        checklist: [],
+        checklist,
         createdBy,
         comments: [],
         createdAt: now,
@@ -7143,6 +7146,9 @@ async function handleApi(req, res, pathname) {
     const title = sanitizeText(body.title, 512);
     const description = sanitizeText(body.description, 5000);
     const images = sanitizeCardImages(body.images, { persistDataUrls: true });
+    const checklist = Object.prototype.hasOwnProperty.call(body, 'checklist')
+      ? sanitizeChecklist(body.checklist)
+      : [];
 
     let urgency = 'white';
     if (Object.prototype.hasOwnProperty.call(body, 'urgency')) {
@@ -7174,7 +7180,7 @@ async function handleApi(req, res, pathname) {
       title,
       description,
       images,
-      checklist: [],
+      checklist,
       createdBy: sanitizeCardCreator(user.login),
       isFavorite: false,
       comments: [],
