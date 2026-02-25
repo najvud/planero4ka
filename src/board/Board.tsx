@@ -3211,7 +3211,15 @@ export function Board({ sessionUser, onLogout, onProfileSave }: BoardProps) {
               </div>
             </div>
 
-            <div className={`side ${isBoardDragActive ? 'sideTrashActive' : ''}`}>
+            <div
+              className={[
+                'side',
+                isBoardDragActive ? 'sideTrashActive' : '',
+                (board.history?.length ?? 0) === 0 ? 'sideHistoryEmpty' : '',
+              ]
+                .filter(Boolean)
+                .join(' ')}
+            >
               <HistoryPanel
                 items={board.history ?? []}
                 existingCardIds={existingCardIds}

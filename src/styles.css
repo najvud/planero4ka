@@ -537,6 +537,20 @@ body{
   position:relative;
 }
 
+.side.sideHistoryEmpty{
+  height:auto;
+}
+
+.side.sideHistoryEmpty .historyPanel{
+  flex:0 0 auto;
+  height:auto;
+  max-height:none;
+}
+
+.side.sideHistoryEmpty.sideTrashActive .historyPanel{
+  max-height:none;
+}
+
 /* --- Board --- */
 .board{
   display:grid;
