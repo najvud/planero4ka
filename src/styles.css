@@ -1,7 +1,7 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600;700&family=Montserrat:wght@400;500;600&family=Nunito:wght@700;800&display=swap');
 
 :root{
-  --bg:#d8d0c1;
+  --bg:#c6def6;
   --panel:#e8edf4;
   --text:#0f172a;
   --muted:#4e5b70;
@@ -53,9 +53,9 @@ body{
   color:var(--text);
   background-color:var(--bg);
   background-image:
-    radial-gradient(1180px 600px at 8% -12%, rgba(251,191,36,.14), transparent 62%),
-    radial-gradient(980px 520px at 100% -4%, rgba(99,102,241,.12), transparent 60%),
-    linear-gradient(180deg, #ddd4c6 0%, #cbc1b2 100%);
+    radial-gradient(1180px 600px at 8% -12%, rgba(14,165,233,.24), transparent 62%),
+    radial-gradient(980px 520px at 100% -4%, rgba(56,189,248,.20), transparent 60%),
+    linear-gradient(180deg, #d9ecfb 0%, #b9d5f2 100%);
 }
 
 #root{
